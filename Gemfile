@@ -7,4 +7,5 @@ gem 'httparty'
 
 group :test do
   gem 'minitest'
+  gem 'dotenv'
 end

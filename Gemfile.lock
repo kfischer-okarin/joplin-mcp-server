@@ -3,6 +3,7 @@ GEM
   specs:
     bigdecimal (3.1.9)
     csv (3.3.2)
+    dotenv (3.1.7)
     httparty (0.22.0)
       csv
       mini_mime (>= 1.0.0)
@@ -18,6 +19,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   httparty
   mcp-rb
   minitest
