@@ -16,15 +16,20 @@ describe JoplinAPIClient do
   end
 
   it 'can create a note' do
-    note = client.create_note(
-      title: 'Test Note',
-      body: 'This is a test note'
-    )
+    note = client.post('/notes', { title: 'Test Note', body: 'This is a test note' })
 
-    retrieved_note = client.get_note(note['id'], fields: 'id,title,body')
+    retrieved_note = client.get("/notes/#{note['id']}", query: { fields: 'id,title,body' })
 
     assert_equal note['id'], retrieved_note['id']
     assert_equal note['title'], retrieved_note['title']
     assert_equal note['body'], retrieved_note['body']
+  end
+
+  it 'can list all notebooks' do
+    notebooks = client.get('/folders', query: { fields: 'id,title' })['items']
+
+    assert notebooks.is_a?(Array)
+    assert notebooks.all? { |notebook| notebook.is_a?(Hash) }
+    assert notebooks.all? { |notebook| notebook.keys == ['id', 'title'] }
   end
 end
