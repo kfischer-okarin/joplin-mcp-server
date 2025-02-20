@@ -7,6 +7,17 @@ Dotenv.require_keys('JOPLIN_PORT', 'JOPLIN_TOKEN')
 
 require 'mcp'
 
-# Your code using the mcp-rb gem goes here
+require_relative 'lib/joplin_api_client'
+require_relative 'lib/tools'
 
-puts 'mcp-rb gem setup complete!'
+api_client = JoplinAPIClient.new(port: ENV['JOPLIN_PORT'], token: ENV['JOPLIN_TOKEN'])
+
+name 'joplin-mcp-server'
+
+tool 'list_notebooks' do
+  description 'Retrieve the complete notebook hierarchy from Joplin'
+
+  call do
+    Tools::ListNotebooks.new(api_client).call
+  end
+end
