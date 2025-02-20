@@ -19,6 +19,18 @@ class JoplinAPIClient
     response.code == 200 && response.parsed_response == 'JoplinClipperServer'
   end
 
+  def get_all_items(path, options = {})
+    page = 1
+    items = []
+    loop do
+      response = get(path, merge_request_options(options, { query: { page: page } }))
+      items.concat(response['items'])
+      page += 1
+      break unless response['has_more']
+    end
+    items
+  end
+
   def get(path, options = {})
     response = self.class.get(
       path,

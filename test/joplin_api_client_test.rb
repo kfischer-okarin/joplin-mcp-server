@@ -26,7 +26,7 @@ describe JoplinAPIClient do
   end
 
   it 'can list all notebooks' do
-    notebooks = client.get('/folders', query: { fields: 'id,title' })['items']
+    notebooks = client.get_all_items('/folders', query: { fields: 'id,title' })
 
     assert notebooks.is_a?(Array)
     assert notebooks.all? { |notebook| notebook.is_a?(Hash) }
