@@ -58,13 +58,23 @@ class JoplinAPIClient
   private
 
   def request_options(options = {})
-    {
-      base_uri: @base_uri,
-      query: {
-        token: @token,
-        **options.fetch(:query, {})
+    merge_request_options(
+      {
+        base_uri: @base_uri,
+        query: { token: @token }
       },
-      **options.except(:query)
+      options
+    )
+  end
+
+  def merge_request_options(options1, options2)
+    {
+      query: {
+        **options1.fetch(:query, {}),
+        **options2.fetch(:query, {})
+      },
+      **options1.except(:query),
+      **options2.except(:query)
     }
   end
 end
