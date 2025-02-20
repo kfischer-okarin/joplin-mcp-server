@@ -8,7 +8,7 @@ GEM
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    mcp-rb (0.2.0)
+    mcp-rb (0.3.0)
     mini_mime (1.1.5)
     minitest (5.25.4)
     multi_xml (0.7.1)
